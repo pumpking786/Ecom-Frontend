@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { auth_svc } from "../../../services/auth.service";
 export const LoginPage = () => {
   let [data, setData] = useState({
     email: null,
@@ -13,24 +15,14 @@ export const LoginPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let user_detail = {
-      result: {
-        user: { _id: 123, name: "", email: "", role: "admin" },
-        token: "jwttoken",
-      },
-    };
-    localStorage.setItem(
-      "_mern15_user",
-      JSON.stringify(user_detail.result.user)
-    );
-    localStorage.setItem("_mern15_token", user_detail.result.token);
-    // sessionStorage.setItem("_mern15_user", JSON.stringify(user_detail));
-    // let local_store_user = localStorage.getItem("_mern15_user");
-    // localStorage.clear();
-    // localStorage.removeItem("_mern15_user");
-    navigate("/" + user_detail.result.user.role);
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      let user = await auth_svc.login(data);
+      navigate("/" + user.role);
+    } catch (err) {
+      console.log("AxiosError", err.response);
+    }
   };
 
   useEffect(() => {
@@ -52,14 +44,14 @@ export const LoginPage = () => {
         <Row>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="row mb-3">
-              <Form.Label className="col-sm-3">Username: </Form.Label>
+              <Form.Label className="col-sm-3">Email: </Form.Label>
               <Col sm={9}>
                 <Form.Control
                   //   defaultValue={data.username}
                   onChange={handleChange}
                   size="sm"
-                  name="username"
-                  placeholder="Enter your username "
+                  name="email"
+                  placeholder="Enter your email "
                 ></Form.Control>
               </Col>
             </Form.Group>

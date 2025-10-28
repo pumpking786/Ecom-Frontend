@@ -114,7 +114,7 @@ export const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="row mb-3">
                 <Form.Label className="col-sm-3">Image</Form.Label>
-                <Col sm={9}>
+                <Col sm={4}>
                   <Form.Control
                     name="image"
                     type="file"
@@ -149,6 +149,18 @@ export const RegisterPage = () => {
                     }}
                   ></Form.Control>{" "}
                   <span className="text-danger">{formik.errors?.image}</span>
+                </Col>
+                <Col sm={2}>
+                  {formik.values.image ? (
+                    <>
+                      <img
+                        src={URL.createObjectURL(formik.values.image)}
+                        className="img img-fluid"
+                      />
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </Col>
               </Form.Group>
               <Form.Group className="row mb-3">
