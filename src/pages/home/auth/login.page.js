@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { auth_svc } from "../../../services/auth.service";
 export const LoginPage = () => {
   let [data, setData] = useState({
@@ -20,8 +19,8 @@ export const LoginPage = () => {
       e.preventDefault();
       let user = await auth_svc.login(data);
       navigate("/" + user.role);
-    } catch (err) {
-      console.log("AxiosError", err.response);
+    } catch (excep) {
+      // console.log("AxiosError", excep);
     }
   };
 
