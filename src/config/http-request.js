@@ -16,8 +16,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       //needs a logout
-      localStorage.removeItem("_mern15_token");
-      localStorage.removeItem("_mern15_user");
+      localStorage.removeItem("mern_token");
+      localStorage.removeItem("mern_user");
       window.location.href = "/login";
     } else if (error.response.status === 404 || error.response.status === 403) {
       console.log("here: ", error);

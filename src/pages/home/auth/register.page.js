@@ -18,7 +18,7 @@ export const RegisterPage = () => {
     password: Yup.string().required().min(8),
     role: Yup.string().required(),
     status: Yup.string().default("active"),
-    image: Yup.object().nullable(),
+    image: Yup.mixed().nullable(),
     address: Yup.string().nullable(),
   });
   let formik = useFormik({

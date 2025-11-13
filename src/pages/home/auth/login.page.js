@@ -25,8 +25,8 @@ export const LoginPage = () => {
   };
 
   useEffect(() => {
-    let token = localStorage.getItem("_mern15_token");
-    let user = JSON.parse(localStorage.getItem("_mern15_user"));
+    let token = localStorage.getItem("mern_token");
+    let user = JSON.parse(localStorage.getItem("mern_user"));
     if (token) {
       navigate("/" + user.role);
     }

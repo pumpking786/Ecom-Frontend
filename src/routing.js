@@ -27,7 +27,12 @@ const Routing = () => {
 
           <Route
             path="/admin"
-            element={<AdminAccessControl Component={<AdminLayout />} />}
+            element={
+              <AdminAccessControl
+                accessTo="admin"
+                Component={<AdminLayout />}
+              />
+            }
           >
             <Route index element={<AdminDashboard />} />
             <Route
@@ -46,7 +51,15 @@ const Routing = () => {
               <Route path=":id/delete" element={<>Delete</>} />
             </Route>
           </Route>
-          <Route path="/customer" element={<>Customer Dashboard</>} />
+          <Route
+            path="/customer"
+            element={
+              <AdminAccessControl
+                accessTo="customer"
+                Component={<>Customer Dashboard</>}
+              />
+            }
+          />
           <Route path="/customer/order" element={<>Customer Order</>} />
           <Route
             path="/customer/order/history"

@@ -5,7 +5,16 @@ import Logo from "../../assets/image/logo.png";
 import { FaPhone, FaMapMarked } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
 export const HeaderComponent = () => {
+  let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
+  let navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("mern_token");
+    localStorage.removeItem("mern_user");
+    navigate("/login");
+  };
   return (
     <>
       {/* Nav Section Start */}
@@ -45,12 +54,29 @@ export const HeaderComponent = () => {
             <NavLink to="/cart" className="nav-link">
               Cart (0)
             </NavLink>
-            <NavLink to="/login" className="nav-link">
-              Login
-            </NavLink>
-            <NavLink to="/register" className="nav-link">
-              Register
-            </NavLink>
+            {loggedUser ? (
+              <>
+                <NavLink to={"/" + loggedUser.role} className="nav-link">
+                  {loggedUser.name}
+                </NavLink>
+                <NavLink
+                  onClick={handleLogout}
+                  to="/login"
+                  className="nav-link"
+                >
+                  Log out
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" className="nav-link">
+                  Login
+                </NavLink>
+                <NavLink to="/register" className="nav-link">
+                  Register
+                </NavLink>
+              </>
+            )}
           </Nav>
         </Container>
       </Navbar>

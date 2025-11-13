@@ -18,6 +18,17 @@ class AuthService extends HttpService {
       throw err;
     }
   };
+  getLoggedInUser = async () => {
+    try {
+      let response = await this.getRequest("/user-profile", {
+        login: true,
+      });
+      // console.log("GetLoggedInUser", response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 export const auth_svc = new AuthService();
 export default AuthService;
