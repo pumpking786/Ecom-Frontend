@@ -10,7 +10,8 @@ export const HeaderComponent = () => {
   let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
   let navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     localStorage.removeItem("mern_token");
     localStorage.removeItem("mern_user");
     navigate("/login");

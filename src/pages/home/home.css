@@ -3,10 +3,11 @@
   text-align: center;
   padding: 10px 0;
   width: 100%; /* Ensure the slide takes full width */
+  text-align: center;
 }
 
 .banner-image {
-  width: 100%; /* Stretch to full width of the slide */
+  width: 104%; /* Stretch to full width of the slide */
   height: auto; /* Maintain aspect ratio */
   max-height: 300px; /* Limit height to avoid oversized images */
   object-fit: contain; /* Show the entire image, no cropping */
@@ -16,7 +17,7 @@
 
 /* Ensure Slider takes full width */
 .slick-slider {
-  width: 100%;
+  width: 98%;
 }
 
 /* Optional: Adjust for smaller screens */

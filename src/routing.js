@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RegisterPage } from "./pages/home/auth/register.page";
 import HomePageLayout from "./pages/home/home-page.layout";
+import AdminSliderList from "./pages/admin/slider/slider-list.page";
 
 const Routing = () => {
   return (
@@ -35,6 +36,7 @@ const Routing = () => {
             }
           >
             <Route index element={<AdminDashboard />} />
+            <Route path="slider" element={<AdminSliderList />} />
             <Route
               path="user"
               element={

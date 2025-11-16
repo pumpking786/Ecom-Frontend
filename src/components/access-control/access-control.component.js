@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth_svc } from "../../services/auth.service";
-
+import { ClipLoader } from "react-spinners";
 export const AdminAccessControl = ({ Component, accessTo }) => {
   let token = localStorage.getItem("mern_token");
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,9 @@ export const AdminAccessControl = ({ Component, accessTo }) => {
     }
   }, [accessTo, navigate]);
   useEffect(() => {
+    // setTimeout(() => {
     getUserDetail();
+    // }, 3000);
     if (!token) {
       navigate("/login");
     } else {
@@ -33,5 +35,23 @@ export const AdminAccessControl = ({ Component, accessTo }) => {
       setLoading(false);
     }
   }, [getUserDetail]);
-  return loading ? <>Loading</> : Component;
+  return loading ? (
+    <>
+      {" "}
+      <ClipLoader
+        color={"red"}
+        loading={loading}
+        cssOverride={{
+          display: "block",
+          margin: "0 auto",
+          borderColor: "red",
+        }}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </>
+  ) : (
+    Component
+  );
 };
