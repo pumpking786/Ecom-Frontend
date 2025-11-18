@@ -5,8 +5,8 @@ import { auth_svc } from "../../../services/auth.service";
 import { toast } from "react-toastify";
 export const LoginPage = () => {
   let [data, setData] = useState({
-    email: null,
-    password: null,
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({ email: "", password: "" });
   let navigate = useNavigate();

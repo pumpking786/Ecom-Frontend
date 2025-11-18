@@ -9,6 +9,17 @@ class SliderService extends HttpService {
       throw error;
     }
   };
+  addSlider = async (data) => {
+    try {
+      let response = await this.postRequest("/banner", data, {
+        login: true,
+        files: true,
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 export const slider_svc = new SliderService();
 export default SliderService;

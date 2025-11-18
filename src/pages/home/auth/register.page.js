@@ -86,7 +86,7 @@ export const RegisterPage = () => {
                 <Form.Label className="col-sm-3">Address:</Form.Label>
                 <Col sm={9}>
                   <Form.Control
-                    name="Address"
+                    name="address"
                     as={"textarea"}
                     placeholder="Enter your address"
                     rows={5}
