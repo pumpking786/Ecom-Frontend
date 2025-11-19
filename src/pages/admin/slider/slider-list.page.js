@@ -3,7 +3,23 @@ import DataTable from "react-data-table-component";
 import { useCallback, useEffect, useState } from "react";
 import { slider_svc } from "./slider.service";
 import { toast } from "react-toastify";
+import { Badge } from "react-bootstrap";
+import AdminActionBtn from "../../../components/admin/action-btn.component";
+import LightBox from "../../../components/admin/lightbox.component";
+
 const AdminSliderList = () => {
+  const deleteSlider = async (id) => {
+    //api integration
+    try {
+      let response = await slider_svc.deleteSliderById(id);
+      if (response.status) {
+        toast.success(response.msg);
+        getAllSliders();
+      } else {
+        toast.error(response.msg);
+      }
+    } catch (err) {}
+  };
   const columns = [
     {
       name: "Title",
@@ -16,16 +32,32 @@ const AdminSliderList = () => {
     },
     {
       name: "Image",
-      selector: (row) => row.image,
+      selector: (row) => (
+        <>
+          <LightBox image={row.image} />
+        </>
+      ),
     },
     {
       name: "Status",
-      selector: (row) => row.status,
+      selector: (row) => (
+        <Badge bg={row.status === "active" ? "success" : "danger"}>
+          {row.status}
+        </Badge>
+      ),
       sortable: true,
     },
     {
       name: "Action",
-      selector: (row) => "Edit/Delete",
+      selector: (row) => (
+        <>
+          <AdminActionBtn
+            id={row._id}
+            type={"slider"}
+            onDelete={deleteSlider}
+          />
+        </>
+      ),
     },
   ];
   let [data, setData] = useState();

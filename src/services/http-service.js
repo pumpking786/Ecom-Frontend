@@ -40,5 +40,16 @@ class HttpService {
       throw err;
     }
   };
+  deleteRequest = async (url, config = {}) => {
+    try {
+      this.getHeaders(config);
+      let response = await axiosInstance.delete(url, {
+        headers: this.headers,
+      });
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 export default HttpService;
