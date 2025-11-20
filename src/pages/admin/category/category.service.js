@@ -1,17 +1,17 @@
 import HttpService from "../../../services/http-service";
 
-class SliderService extends HttpService {
-  listAllBanners = async () => {
+class CategoryService extends HttpService {
+  listAllCategories = async () => {
     try {
-      let response = await this.getRequest("/banner");
+      let response = await this.getRequest("/category");
       return response;
     } catch (error) {
       throw error;
     }
   };
-  addSlider = async (data) => {
+  addCategory = async (data) => {
     try {
-      let response = await this.postRequest("/banner", data, {
+      let response = await this.postRequest("/category", data, {
         login: true,
         files: true,
       });
@@ -20,9 +20,9 @@ class SliderService extends HttpService {
       throw error;
     }
   };
-  updateSlider = async (data, id) => {
+  updateCategory = async (data, id) => {
     try {
-      let response = await this.putRequest("/banner/" + id, data, {
+      let response = await this.putRequest("/category/" + id, data, {
         login: true,
         files: true,
       });
@@ -31,9 +31,9 @@ class SliderService extends HttpService {
       throw error;
     }
   };
-  deleteSliderById = async (id) => {
+  deleteCategoryById = async (id) => {
     try {
-      let response = await this.deleteRequest("/banner/" + id, {
+      let response = await this.deleteRequest("/category/" + id, {
         login: true,
       });
       return response;
@@ -43,12 +43,12 @@ class SliderService extends HttpService {
   };
   getDetailById = async (id) => {
     try {
-      let response = await this.getRequest("/banner/" + id);
+      let response = await this.getRequest("/category/" + id);
       return response;
     } catch (error) {
       throw error;
     }
   };
 }
-export const slider_svc = new SliderService();
-export default SliderService;
+export const category_svc = new CategoryService();
+export default CategoryService;

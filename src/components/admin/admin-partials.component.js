@@ -108,13 +108,13 @@ export const AdminSideNav = () => {
               </div>
               Slider Manage
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/admin/brand">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-tachometer-alt"></i>
               </div>
               Brand Manage
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/admin/category">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-tachometer-alt"></i>
               </div>

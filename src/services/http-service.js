@@ -29,6 +29,18 @@ class HttpService {
       throw err;
     }
   };
+  putRequest = async (url, data, config = {}) => {
+    try {
+      this.getHeaders(config);
+      // console.log(data);
+      let response = await axiosInstance.put(url, data, {
+        headers: this.headers,
+      });
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  };
   getRequest = async (url, config = {}) => {
     try {
       this.getHeaders(config);
