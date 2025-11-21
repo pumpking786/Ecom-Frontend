@@ -64,11 +64,11 @@ const Routing = () => {
                 </>
               }
             >
-              <Route index element={<AdminUserList />} />
+              {/* <Route index element={<AdminUserList />} />
               <Route path="create" element={<AdminUserCreate />} />
               <Route path=":id/edit" element={<AdminUserEdit />} />
               <Route path=":id" element={<AdminUserList />} />
-              <Route path=":id/delete" element={<AdminUserList />} />
+              <Route path=":id/delete" element={<AdminUserList />} /> */}
             </Route>
           </Route>
           <Route
