@@ -20,14 +20,24 @@ const AdminCategoryEdit = () => {
     try {
       let response = await category_svc.getDetailById(params.id);
       if (response.result) {
+        let sel_brands = [];
+        if (response.result?.brands) {
+          response.result.brands.map((item) => {
+            sel_brands.push({
+              value: item._id,
+              label: item.title,
+            });
+          });
+        }
         setDetail({
           name: response.result.name,
           status: response.result.status,
-          link: response.result.link,
           image: response.result.image,
+          parent_id: response.result?.parent_id?._id,
+          brands: sel_brands,
         });
       }
-      console.log(response);
+      console.log(response.result?.parent_id?._id);
     } catch (err) {
       console.log(err);
     }
