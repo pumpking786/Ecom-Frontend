@@ -20,7 +20,7 @@ class AuthService extends HttpService {
   };
   getLoggedInUser = async () => {
     try {
-      let response = await this.getRequest("/user-profile", {
+      let response = await this.getRequest("/me-profile", {
         login: true,
       });
       // console.log("GetLoggedInUser", response);
