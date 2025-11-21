@@ -98,31 +98,31 @@ export const AdminSideNav = () => {
             <div className="sb-sidenav-menu-heading">Core</div>
             <NavLink className="nav-link" to="/">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-home"></i>
               </div>
               Visit Site
             </NavLink>
-            <NavLink className="nav-link" to="/admin/slider">
+            <NavLink className="nav-link" to="/admin/sliders">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-images"></i>
               </div>
               Slider Manage
             </NavLink>
-            <NavLink className="nav-link" to="/admin/brand">
+            <NavLink className="nav-link" to="/admin/brands">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-b"></i>
               </div>
               Brand Manage
             </NavLink>
-            <NavLink className="nav-link" to="/admin/category">
+            <NavLink className="nav-link" to="/admin/categories">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-sitemap"></i>
               </div>
               Category Manage
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/admin/users">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-users"></i>
               </div>
               User Manage
             </NavLink>

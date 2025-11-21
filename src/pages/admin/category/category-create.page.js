@@ -8,7 +8,7 @@ const AdminCategoryCreate = () => {
     try {
       let response = await category_svc.addCategory(data);
       toast.success(response.msg);
-      navigate("/admin/category");
+      navigate("/admin/categories");
     } catch (err) {
       toast.error(err);
     }
@@ -22,7 +22,7 @@ const AdminCategoryCreate = () => {
             <NavLink to="/admin">Dashboard</NavLink>
           </li>
           <li className="breadcrumb-item active">
-            <NavLink to="/admin/category">Category List</NavLink>
+            <NavLink to="/admin/categories">Category List</NavLink>
           </li>
           <li className="breadcrumb-item active">Category Create</li>
         </ol>

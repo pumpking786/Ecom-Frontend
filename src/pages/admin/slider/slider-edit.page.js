@@ -15,7 +15,7 @@ const AdminSliderEdit = () => {
     try {
       let response = await slider_svc.updateSlider(data, params.id);
       toast.success(response.msg);
-      navigate("/admin/slider");
+      navigate("/admin/sliders");
     } catch (err) {
       toast.error(err);
     }
@@ -48,7 +48,7 @@ const AdminSliderEdit = () => {
             <NavLink to="/admin">Dashboard</NavLink>
           </li>
           <li className="breadcrumb-item active">
-            <NavLink to="/admin/slider">Slider List</NavLink>
+            <NavLink to="/admin/sliders">Slider List</NavLink>
           </li>
           <li className="breadcrumb-item active">Slider Edit</li>
         </ol>

@@ -19,6 +19,9 @@ import AdminBrandEdit from "./pages/admin/brand/brand-edit.page";
 import AdminCategoryList from "./pages/admin/category/category-list.page";
 import AdminCategoryCreate from "./pages/admin/category/category-create.page";
 import AdminCategoryEdit from "./pages/admin/category/category-edit.page";
+import AdminUserList from "./pages/admin/user/user-list.page";
+import AdminUserCreate from "./pages/admin/user/user-create.page";
+import AdminUserEdit from "./pages/admin/user/user-edit.page";
 const Routing = () => {
   return (
     <>
@@ -43,17 +46,17 @@ const Routing = () => {
             }
           >
             <Route index element={<AdminDashboard />} />
-            <Route path="slider" element={<AdminSliderList />} />
+            <Route path="sliders" element={<AdminSliderList />} />
             <Route path="slider/create" element={<AdminSliderCreate />} />
             <Route path="slider/:id" element={<AdminSliderEdit />} />
-            <Route path="brand" element={<AdminBrandList />} />
+            <Route path="brands" element={<AdminBrandList />} />
             <Route path="brand/create" element={<AdminBrandCreate />} />
             <Route path="brand/:id" element={<AdminBrandEdit />} />
-            <Route path="category" element={<AdminCategoryList />} />
+            <Route path="categories" element={<AdminCategoryList />} />
             <Route path="category/create" element={<AdminCategoryCreate />} />
             <Route path="category/:id" element={<AdminCategoryEdit />} />
             <Route
-              path="user"
+              path="users"
               element={
                 <>
                   User Outlet
@@ -61,11 +64,11 @@ const Routing = () => {
                 </>
               }
             >
-              <Route index element={<>Read</>} />
-              <Route path="create" element={<>Create</>} />
-              <Route path=":id/edit" element={<>Update</>} />
-              <Route path=":id" element={<>Detail of users</>} />
-              <Route path=":id/delete" element={<>Delete</>} />
+              <Route index element={<AdminUserList />} />
+              <Route path="create" element={<AdminUserCreate />} />
+              <Route path=":id/edit" element={<AdminUserEdit />} />
+              <Route path=":id" element={<AdminUserList />} />
+              <Route path=":id/delete" element={<AdminUserList />} />
             </Route>
           </Route>
           <Route

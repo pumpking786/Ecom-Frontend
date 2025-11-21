@@ -1,14 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { brand_svc } from "./brand.service";
-import BrandForm from "./brand-form.component";
-const AdminBrandCreate = () => {
+import { user_svc } from "./user.service";
+import UserForm from "./user-form.component";
+const AdminUserCreate = () => {
   let navigate = useNavigate();
-  const addBrand = async (data) => {
+  const addUser = async (data) => {
     try {
-      let response = await brand_svc.addBrand(data);
+      let response = await user_svc.addUser(data);
       toast.success(response.msg);
-      navigate("/admin/brands");
+      navigate("/admin/users");
     } catch (err) {
       toast.error(err);
     }
@@ -16,28 +16,28 @@ const AdminBrandCreate = () => {
   return (
     <>
       <div className="container-fluid px-4">
-        <h1 className="mt-4">Brand Create</h1>
+        <h1 className="mt-4">User Create</h1>
         <ol className="breadcrumb mb-4">
           <li className="breadcrumb-item active">
             <NavLink to="/admin">Dashboard</NavLink>
           </li>
           <li className="breadcrumb-item active">
-            <NavLink to="/admin/brands">Brand List</NavLink>
+            <NavLink to="/admin/users">User List</NavLink>
           </li>
-          <li className="breadcrumb-item active">Brand Create</li>
+          <li className="breadcrumb-item active">User Create</li>
         </ol>
 
         <div className="card mb-4">
           <div className="card-header">
             <i className="fas fa-table me-1"></i>
-            Brand Form
+            User Form
           </div>
           <div className="card-body">
-            <BrandForm submitForm={addBrand} buttontext="Submit" />
+            <UserForm submitForm={addUser} buttontext="Submit" />
           </div>
         </div>
       </div>
     </>
   );
 };
-export default AdminBrandCreate;
+export default AdminUserCreate;

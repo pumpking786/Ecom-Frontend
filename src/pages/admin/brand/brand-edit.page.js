@@ -11,7 +11,7 @@ const AdminBrandEdit = () => {
     try {
       let response = await brand_svc.updateBrand(data, params.id);
       toast.success(response.msg);
-      navigate("/admin/brand");
+      navigate("/admin/brands");
     } catch (err) {
       toast.error(err);
     }
@@ -44,7 +44,7 @@ const AdminBrandEdit = () => {
             <NavLink to="/admin">Dashboard</NavLink>
           </li>
           <li className="breadcrumb-item active">
-            <NavLink to="/admin/brand">Brand List</NavLink>
+            <NavLink to="/admin/brands">Brand List</NavLink>
           </li>
           <li className="breadcrumb-item active">Brand Edit</li>
         </ol>
