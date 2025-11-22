@@ -33,7 +33,7 @@ const AdminUserCreate = () => {
             User Form
           </div>
           <div className="card-body">
-            <UserForm submitForm={addUser} buttontext="Submit" />
+            <UserForm submitForm={addUser} buttontext="Submit" isEdit={false} />
           </div>
         </div>
       </div>

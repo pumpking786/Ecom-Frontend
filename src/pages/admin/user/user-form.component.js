@@ -3,18 +3,34 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect } from "react";
 
-const UserForm = ({ submitForm, defaultValue, buttontext }) => {
+const UserForm = ({ submitForm, defaultValue, buttontext, isEdit = false }) => {
   let validationSchema = Yup.object({
     name: Yup.string().required().min(3),
+    email: Yup.string().email().required(),
     status: Yup.string().required(),
+    role: Yup.string().required(),
+    address: Yup.string().required(),
+    ...(isEdit
+      ? {}
+      : {
+          password: Yup.string()
+            .required("Password is required")
+            .min(8, "Password must be at least 8 characters"),
+          confirmPassword: Yup.string()
+            .oneOf([Yup.ref("password")], "Passwords must match")
+            .required("Confirm password is required"),
+        }),
   });
   let formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       role: "",
+      address: "",
       status: "",
-      image: "",
+      image: null,
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -52,7 +68,7 @@ const UserForm = ({ submitForm, defaultValue, buttontext }) => {
           <Col sm={9}>
             <Form.Control
               size="sm"
-              type="text"
+              type="email"
               name="email"
               placeholder="Enter the email"
               required
@@ -60,6 +76,20 @@ const UserForm = ({ submitForm, defaultValue, buttontext }) => {
               onChange={formik.handleChange}
             />
             <span className="text-danger">{formik.errors?.email}</span>
+          </Col>
+        </Form.Group>
+        <Form.Group className="mb-3 row">
+          <Form.Label className="col-sm-3">Address:</Form.Label>
+          <Col sm={9}>
+            <Form.Control
+              size="sm"
+              type="text"
+              name="address"
+              placeholder="Enter the address"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+            />
+            <span className="text-danger">{formik.errors?.address}</span>
           </Col>
         </Form.Group>
         <Form.Group className="mb-3 row">
@@ -98,6 +128,50 @@ const UserForm = ({ submitForm, defaultValue, buttontext }) => {
             <span className="text-danger">{formik.errors?.status}</span>
           </Col>
         </Form.Group>
+        {!isEdit && (
+          <>
+            <Form.Group className="mb-3 row">
+              <Form.Label className="col-sm-3">Password:</Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  size="sm"
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                  value={formik.values.password || ""}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.password && !!formik.errors.password
+                  }
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+                </Form.Control.Feedback>
+              </Col>
+            </Form.Group>
+
+            <Form.Group className="mb-3 row">
+              <Form.Label className="col-sm-3">Confirm Password:</Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  size="sm"
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  value={formik.values.confirmPassword || ""}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.confirmPassword &&
+                    !!formik.errors.confirmPassword
+                  }
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.confirmPassword}
+                </Form.Control.Feedback>
+              </Col>
+            </Form.Group>
+          </>
+        )}
         <Form.Group className="mb-3 row">
           <Form.Label className="col-sm-3">Image:</Form.Label>
           <Col sm={3}>

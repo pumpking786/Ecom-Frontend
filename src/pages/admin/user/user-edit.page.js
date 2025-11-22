@@ -23,6 +23,7 @@ const AdminUserEdit = () => {
         setDetail({
           name: response.result.name,
           email: response.result.email,
+          address: response.result.address,
           role: response.result.role,
           status: response.result.status,
           image: response.result.image,
@@ -60,6 +61,7 @@ const AdminUserEdit = () => {
               submitForm={updateUser}
               defaultValue={detail}
               buttontext="Save"
+              isEdit={true}
             />
           </div>
         </div>
