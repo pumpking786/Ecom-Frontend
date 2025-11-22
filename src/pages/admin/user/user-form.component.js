@@ -5,12 +5,14 @@ import { useEffect } from "react";
 
 const UserForm = ({ submitForm, defaultValue, buttontext }) => {
   let validationSchema = Yup.object({
-    title: Yup.string().required().min(3),
+    name: Yup.string().required().min(3),
     status: Yup.string().required(),
   });
   let formik = useFormik({
     initialValues: {
-      title: "",
+      name: "",
+      email: "",
+      role: "",
       status: "",
       image: "",
     },
@@ -31,18 +33,51 @@ const UserForm = ({ submitForm, defaultValue, buttontext }) => {
     <>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3 row">
-          <Form.Label className="col-sm-3">Title:</Form.Label>
+          <Form.Label className="col-sm-3">Name:</Form.Label>
           <Col sm={9}>
             <Form.Control
               size="sm"
               type="text"
-              name="title"
-              placeholder="Enter the user title"
+              name="name"
+              placeholder="Enter the user name"
               required
-              value={formik.values.title}
+              value={formik.values.name}
               onChange={formik.handleChange}
             />
-            <span className="text-danger">{formik.errors?.title}</span>
+            <span className="text-danger">{formik.errors?.name}</span>
+          </Col>
+        </Form.Group>
+        <Form.Group className="mb-3 row">
+          <Form.Label className="col-sm-3">Email:</Form.Label>
+          <Col sm={9}>
+            <Form.Control
+              size="sm"
+              type="text"
+              name="email"
+              placeholder="Enter the email"
+              required
+              value={formik.values.email}
+              onChange={formik.handleChange}
+            />
+            <span className="text-danger">{formik.errors?.email}</span>
+          </Col>
+        </Form.Group>
+        <Form.Group className="mb-3 row">
+          <Form.Label className="col-sm-3">Role:</Form.Label>
+          <Col sm={9}>
+            <Form.Select
+              name="role"
+              required
+              size="sm"
+              value={formik.values.role}
+              onChange={formik.handleChange}
+            >
+              <option>--Select Any One--</option>
+              <option value="customer">Customer</option>
+              <option value="seller">Seller</option>
+              <option value="admin">Admin</option>
+            </Form.Select>
+            <span className="text-danger">{formik.errors?.role}</span>
           </Col>
         </Form.Group>
 
@@ -69,7 +104,7 @@ const UserForm = ({ submitForm, defaultValue, buttontext }) => {
             <Form.Control
               type="file"
               name="image"
-              required={!formik.values.image ? true : false}
+              // required={!formik.values.image ? true : false}
               accept="image/*"
               size="sm"
               onChange={(e) => {

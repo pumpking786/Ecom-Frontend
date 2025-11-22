@@ -22,6 +22,7 @@ import AdminCategoryEdit from "./pages/admin/category/category-edit.page";
 import AdminUserList from "./pages/admin/user/user-list.page";
 import AdminUserCreate from "./pages/admin/user/user-create.page";
 import AdminUserEdit from "./pages/admin/user/user-edit.page";
+import AdminUserChangePwd from "./pages/admin/user/user-changepwd.page";
 const Routing = () => {
   return (
     <>
@@ -55,21 +56,11 @@ const Routing = () => {
             <Route path="categories" element={<AdminCategoryList />} />
             <Route path="category/create" element={<AdminCategoryCreate />} />
             <Route path="category/:id" element={<AdminCategoryEdit />} />
-            <Route
-              path="users"
-              element={
-                <>
-                  User Outlet
-                  <Outlet />
-                </>
-              }
-            >
-              {/* <Route index element={<AdminUserList />} />
-              <Route path="create" element={<AdminUserCreate />} />
-              <Route path=":id/edit" element={<AdminUserEdit />} />
-              <Route path=":id" element={<AdminUserList />} />
-              <Route path=":id/delete" element={<AdminUserList />} /> */}
-            </Route>
+
+            <Route path="users" element={<AdminUserList />} />
+            <Route path="user/create" element={<AdminUserCreate />} />
+            <Route path="user/:id" element={<AdminUserEdit />} />
+            <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
           </Route>
           <Route
             path="/customer"

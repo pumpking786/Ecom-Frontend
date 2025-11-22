@@ -22,11 +22,18 @@ const AdminUserList = () => {
   };
   const columns = [
     {
-      name: "Title",
-      selector: (row) => row.title,
+      name: "Name",
+      selector: (row) => row.name,
       sortable: true,
     },
-
+    {
+      name: "Email",
+      selector: (row) => row.email,
+    },
+    {
+      name: "Role",
+      selector: (row) => row.role,
+    },
     {
       name: "Image",
       selector: (row) => (
@@ -48,6 +55,12 @@ const AdminUserList = () => {
       name: "Action",
       selector: (row) => (
         <>
+          <NavLink
+            to={"/admin/change-pwd/" + row._id}
+            className="btn btn-sm btn-rounded btn-warning me-1"
+          >
+            <i className="fa fa-key text-white"></i>
+          </NavLink>
           <AdminActionBtn id={row._id} type={"user"} onDelete={deleteUser} />
         </>
       ),
@@ -68,9 +81,9 @@ const AdminUserList = () => {
   return (
     <>
       <div className="container-fluid px-4">
-        <h1 className="mt-4">Dashboard</h1>
+        <h1 className="mt-4">Users</h1>
         <ol className="breadcrumb mb-4">
-          <li className="breadcrumb-item active">Dashboard</li>
+          <li className="breadcrumb-item active">Users</li>
         </ol>
 
         <div className="card mb-4">

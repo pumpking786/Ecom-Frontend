@@ -76,9 +76,9 @@ const AdminCategoryList = () => {
   return (
     <>
       <div className="container-fluid px-4">
-        <h1 className="mt-4">Dashboard</h1>
+        <h1 className="mt-4">Categories</h1>
         <ol className="breadcrumb mb-4">
-          <li className="breadcrumb-item active">Dashboard</li>
+          <li className="breadcrumb-item active">Categories</li>
         </ol>
 
         <div className="card mb-4">

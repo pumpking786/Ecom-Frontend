@@ -3,7 +3,9 @@ import HttpService from "../../../services/http-service";
 class UserService extends HttpService {
   listAllUsers = async () => {
     try {
-      let response = await this.getRequest("/user");
+      let response = await this.getRequest("/user", {
+        login: true,
+      });
       return response;
     } catch (error) {
       throw error;
@@ -43,7 +45,9 @@ class UserService extends HttpService {
   };
   getDetailById = async (id) => {
     try {
-      let response = await this.getRequest("/user/" + id);
+      let response = await this.getRequest("/user/" + id, {
+        login: true,
+      });
       return response;
     } catch (error) {
       throw error;

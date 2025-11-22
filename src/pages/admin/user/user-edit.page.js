@@ -21,9 +21,10 @@ const AdminUserEdit = () => {
       let response = await user_svc.getDetailById(params.id);
       if (response.result) {
         setDetail({
-          title: response.result.title,
+          name: response.result.name,
+          email: response.result.email,
+          role: response.result.role,
           status: response.result.status,
-          link: response.result.link,
           image: response.result.image,
         });
       }
