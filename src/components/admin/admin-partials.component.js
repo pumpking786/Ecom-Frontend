@@ -128,7 +128,7 @@ export const AdminSideNav = () => {
             </NavLink>
             <NavLink className="nav-link" to="/">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt"></i>
+                <i className="fas fa-shopping-cart"></i>
               </div>
               Product Manage
             </NavLink>

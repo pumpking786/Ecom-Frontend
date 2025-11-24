@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { user_svc } from "./user.service";

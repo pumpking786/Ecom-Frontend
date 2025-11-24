@@ -58,9 +58,11 @@ const Routing = () => {
             <Route path="category/:id" element={<AdminCategoryEdit />} />
 
             <Route path="users" element={<AdminUserList />} />
-            <Route path="user/create" element={<AdminUserCreate />} />
-            <Route path="user/:id" element={<AdminUserEdit />} />
-            <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
+            <Route path="user" element={<AdminUserList />}>
+              <Route path="create" element={<AdminUserCreate />} />
+              <Route path=":id" element={<AdminUserEdit />} />
+              <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
+            </Route>
           </Route>
           <Route
             path="/customer"

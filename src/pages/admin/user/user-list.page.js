@@ -56,7 +56,7 @@ const AdminUserList = () => {
       selector: (row) => (
         <>
           <NavLink
-            to={"/admin/change-pwd/" + row._id}
+            to={"/admin/user/change-pwd/" + row._id}
             className="btn btn-sm btn-rounded btn-warning me-1"
           >
             <i className="fa fa-key text-white"></i>
