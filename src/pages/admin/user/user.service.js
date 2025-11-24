@@ -33,6 +33,20 @@ class UserService extends HttpService {
       throw error;
     }
   };
+  changePasswordByAdmin = async (data, id) => {
+    try {
+      let response = await this.putRequest(
+        "/user/changePasswordByAdmin/" + id,
+        data,
+        {
+          login: true,
+        }
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
   deleteUserById = async (id) => {
     try {
       let response = await this.deleteRequest("/user/" + id, {

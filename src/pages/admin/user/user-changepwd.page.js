@@ -1,8 +1,35 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { user_svc } from "./user.service";
 const AdminUserChangePwd = () => {
+  let navigate = useNavigate();
+  let params = useParams();
+  let validationSchema = Yup.object({
+    newPassword: Yup.string().required().min(8),
+    confirmPassword: Yup.string().required(),
+  });
+  let formik = useFormik({
+    initialValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (data) => {
+      try {
+        let response = await user_svc.changePasswordByAdmin(data, params.id);
+        toast.success(response.msg);
+        navigate("/admin/users");
+      } catch (err) {
+        toast.error(err);
+      }
+      console.log(data);
+    },
+  });
+
   useEffect(() => {}, []);
   return (
     <>
@@ -24,18 +51,22 @@ const AdminUserChangePwd = () => {
             User Form
           </div>
           <div className="card-body">
-            <Form>
+            <Form onSubmit={formik.handleSubmit}>
               <Form.Group className="mb-3 row">
                 <Form.Label className="col-sm-3">New Password:</Form.Label>
                 <Col sm={9}>
                   <Form.Control
                     size="sm"
                     type="text"
-                    name="name"
+                    name="newPassword"
                     placeholder="Enter the new password"
                     required
+                    value={formik.values.newPassword}
+                    onChange={formik.handleChange}
                   />
-                  {/* <span className="text-danger">{formik.errors?.name}</span> */}
+                  <span className="text-danger">
+                    {formik.errors?.newPassword}
+                  </span>
                 </Col>
               </Form.Group>
               <Form.Group className="mb-3 row">
@@ -44,11 +75,15 @@ const AdminUserChangePwd = () => {
                   <Form.Control
                     size="sm"
                     type="text"
-                    name="name"
+                    name="confirmPassword"
                     placeholder="Enter the new password again"
                     required
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
                   />
-                  {/* <span className="text-danger">{formik.errors?.name}</span> */}
+                  <span className="text-danger">
+                    {formik.errors?.confirmPassword}
+                  </span>
                 </Col>
               </Form.Group>
 
