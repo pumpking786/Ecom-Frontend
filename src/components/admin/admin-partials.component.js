@@ -126,7 +126,7 @@ export const AdminSideNav = () => {
               </div>
               User Manage
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/admin/products">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-shopping-cart"></i>
               </div>

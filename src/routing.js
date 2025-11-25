@@ -19,6 +19,9 @@ import AdminBrandEdit from "./pages/admin/brand/brand-edit.page";
 import AdminCategoryList from "./pages/admin/category/category-list.page";
 import AdminCategoryCreate from "./pages/admin/category/category-create.page";
 import AdminCategoryEdit from "./pages/admin/category/category-edit.page";
+import AdminProductList from "./pages/admin/product/product-list.page";
+import AdminProductCreate from "./pages/admin/product/product-create.page";
+import AdminProductEdit from "./pages/admin/product/product-edit.page";
 import AdminUserList from "./pages/admin/user/user-list.page";
 import AdminUserCreate from "./pages/admin/user/user-create.page";
 import AdminUserEdit from "./pages/admin/user/user-edit.page";
@@ -56,6 +59,9 @@ const Routing = () => {
             <Route path="categories" element={<AdminCategoryList />} />
             <Route path="category/create" element={<AdminCategoryCreate />} />
             <Route path="category/:id" element={<AdminCategoryEdit />} />
+            <Route path="products" element={<AdminProductList />} />
+            <Route path="product/create" element={<AdminProductCreate />} />
+            <Route path="product/:id" element={<AdminProductEdit />} />
 
             <Route path="users" element={<AdminUserList />} />
             <Route path="user" element={<AdminUserList />}>
