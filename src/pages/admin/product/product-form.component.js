@@ -1,4 +1,4 @@
-import { Form, Col, Button, Image } from "react-bootstrap";
+import { Form, Col, Button, Image, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useCallback, useEffect, useState } from "react";
@@ -14,12 +14,12 @@ const ProductForm = ({ submitForm, defaultValue, buttontext }) => {
     name: Yup.string().required().min(3),
     status: Yup.string().required(),
     price: Yup.number().required().min(1),
-    discount: Yup.number().nullable().default(0).min(0).max(0),
+    discount: Yup.number().nullable().default(0).min(0).max(100),
     description: Yup.string().nullable(),
-    is_featured: Yup.number().default(0),
+    is_featured: Yup.boolean().default(false),
     seller: Yup.string().nullable(),
     category_id: Yup.array().required().nullable(),
-    brand: Yup.string().nullable(),
+    brand: Yup.object().nullable(),
   });
   let formik = useFormik({
     initialValues: {
@@ -36,12 +36,13 @@ const ProductForm = ({ submitForm, defaultValue, buttontext }) => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      let sel_brands = [];
-      if (values.brands) {
-        sel_brands = values.brands.map((item) => item.value);
+      values.brand = values.brand.value;
+      let sel_category_id = [];
+      if (values.category_id) {
+        sel_category_id = values.category_id.map((item) => item.value);
       }
-      values.brands = sel_brands.join(",");
-      // console.log(values);
+      values.category_id = sel_category_id.join(",");
+      console.log(values);
       submitForm(values);
     },
   });
@@ -284,32 +285,37 @@ const ProductForm = ({ submitForm, defaultValue, buttontext }) => {
               type="file"
               name="images"
               multiple
-              required={!formik.values.image ? true : false}
+              required={!formik.values.images ? true : false}
               accept="image/*"
               size="sm"
               onChange={handleFile}
             />
             <span className="text-danger">{formik.errors?.images}</span>
           </Col>
-          {/* <Col sm={2}>
-            {formik.values.image ? (
-              typeof formik.values.images === "object" ? (
-                <Image fluid src={URL.createObjectURL(formik.values?.images)} />
-              ) : (
+        </Form.Group>
+        <Row className="my-3">
+          {formik.values.images &&
+            formik.values.images.map((item, index) => (
+              <Col sm={6} md={2} key={index}>
                 <Image
                   fluid
                   src={
-                    process.env.REACT_APP_API_URL +
-                    "/assets/" +
-                    formik.values?.images
+                    typeof item === "object"
+                      ? URL.createObjectURL(item)
+                      : process.env.REACT_APP_API_URL + "/assets/" + item
                   }
                 />
-              )
-            ) : (
-              <></>
-            )}
-          </Col> */}
-        </Form.Group>
+                <Button
+                  variant="danger"
+                  type="button"
+                  size="sm"
+                  className="btn-rounded"
+                >
+                  <i className="fa fa-trash"></i>
+                </Button>
+              </Col>
+            ))}
+        </Row>
         <Form.Group className="mb-3 row">
           <Col sm={{ offset: 3, span: 9 }}>
             <Button size="sm" variant="danger" type="reset" className="me-3">

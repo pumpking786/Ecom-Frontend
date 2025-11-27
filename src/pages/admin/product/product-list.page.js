@@ -43,15 +43,34 @@ const AdminProductList = () => {
       name: "Featured",
       selector: (row) => (row.is_featured ? "Yes" : "No"),
     },
-
     {
-      name: "Image",
+      name: "Images",
       selector: (row) => (
-        <>
-          <LightBox image={row.image} />
-        </>
+        <div className="d-flex flex-wrap gap-2 py-2">
+          {row.images && row.images.length > 0 ? (
+            row.images.map((img, index) => (
+              <LightBox
+                key={index}
+                image={img} // Send ONE image at a time
+                // thumbnail={`${process.env.REACT_APP_API_URL}/assets/${img}`}
+                // fullSize={`${process.env.REACT_APP_API_URL}/assets/${img}`}
+              />
+            ))
+          ) : (
+            <span className="text-muted small">No images</span>
+          )}
+        </div>
       ),
+      width: "200px",
     },
+    // {
+    //   name: "Image",
+    //   selector: (row) => (
+    //     <>
+    //       <LightBox image={row.images} />
+    //     </>
+    //   ),
+    // },
     {
       name: "Status",
       selector: (row) => (

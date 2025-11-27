@@ -9,7 +9,19 @@ const AdminProductEdit = () => {
   let [detail, setDetail] = useState();
   const updateProduct = async (data) => {
     try {
-      let response = await product_svc.updateProduct(data, params.id);
+      let form_data = new FormData();
+      if (data.images) {
+        data.images.forEach((item) => {
+          if (typeof item === "object") {
+            form_data.append("images", item, item.name);
+          }
+        });
+        delete data.images;
+      }
+      Object.keys(data).forEach((key) => {
+        form_data.append(key, data[key]);
+      });
+      let response = await product_svc.updateProduct(form_data, params.id);
       toast.success(response.msg);
       navigate("/admin/products");
     } catch (err) {
@@ -19,25 +31,39 @@ const AdminProductEdit = () => {
   const getProductDetail = useCallback(async () => {
     try {
       let response = await product_svc.getDetailById(params.id);
+      console.log(response);
+
       if (response.result) {
-        let sel_brands = [];
-        if (response.result?.brands) {
-          response.result.brands.map((item) => {
-            sel_brands.push({
+        let sel_cat = [];
+        if (response.result?.category_id) {
+          response.result.category_id.map((item) => {
+            sel_cat.push({
               value: item._id,
-              label: item.title,
+              label: item.name,
             });
           });
         }
+        let sel_brand = null;
+        if (response.result.brand) {
+          sel_brand = {
+            value: response.result.brand._id,
+            label: response.result.brand.title || response.result.brand.name,
+          };
+        }
         setDetail({
           name: response.result.name,
+          category_id: sel_cat,
+          brand: sel_brand,
           status: response.result.status,
-          image: response.result.image,
-          parent_id: response.result?.parent_id?._id,
-          brands: sel_brands,
+          images: response.result.images,
+          price: response.result.price,
+          discount: response.result.discount,
+          description: response.result.description,
+          is_featured: response.result.is_featured ? 1 : 0,
+          seller: response.result.seller,
         });
       }
-      console.log(response.result?.parent_id?._id);
+      // console.log(response.result?.parent_id?._id);
     } catch (err) {
       console.log(err);
     }

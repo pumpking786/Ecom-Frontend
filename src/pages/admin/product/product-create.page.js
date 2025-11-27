@@ -6,7 +6,17 @@ const AdminProductCreate = () => {
   let navigate = useNavigate();
   const addProduct = async (data) => {
     try {
-      let response = await product_svc.addProduct(data);
+      let form_data = new FormData();
+      if (data.images) {
+        data.images.forEach((item) => {
+          form_data.append("images", item, item.name);
+        });
+        delete data.images;
+      }
+      Object.keys(data).forEach((key) => {
+        form_data.append(key, data[key]);
+      });
+      let response = await product_svc.addProduct(form_data);
       toast.success(response.msg);
       navigate("/admin/products");
     } catch (err) {
