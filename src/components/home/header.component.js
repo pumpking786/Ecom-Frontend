@@ -6,20 +6,23 @@ import { FaPhone, FaMapMarked } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { setLoggedInUser } from "../../reducers/user.reducer";
 export const HeaderComponent = () => {
   //Redux
   // let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
   let loggedUser = useSelector((store) => {
     return store.user.loggedInUser;
   });
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("mern_token");
     // localStorage.removeItem("mern_user");
+    dispatch(setLoggedInUser(null));
     navigate("/login");
   };
   return (
