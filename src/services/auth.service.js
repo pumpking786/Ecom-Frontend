@@ -11,8 +11,10 @@ class AuthService extends HttpService {
         role: result.user.role,
         user_id: result.user._id,
       };
+
       localStorage.setItem("mern_token", result.token);
-      localStorage.setItem("mern_user", JSON.stringify(local_user));
+      //Redux
+      // localStorage.setItem("mern_user", JSON.stringify(local_user));
       return local_user;
     } catch (err) {
       throw err;

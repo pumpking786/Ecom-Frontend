@@ -1,8 +1,14 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export const AdminTopNav = () => {
-  let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
+  //redux
+  let loggedInUser = useSelector((store) => {
+    return store.user.loggedInUser;
+    // console.log(state);
+  });
+  // let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
   const navigate = useNavigate();
   useEffect(() => {
     let className = localStorage.getItem("sb|sidebar-toggle");
@@ -20,7 +26,7 @@ export const AdminTopNav = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("mern_token");
-    localStorage.removeItem("mern_user");
+    // localStorage.removeItem("mern_user");
     navigate("/login");
   };
   return (
@@ -39,7 +45,7 @@ export const AdminTopNav = () => {
       </button>
 
       <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <span style={{ color: "white" }}>{loggedUser.name}</span>
+        <span style={{ color: "white" }}>{loggedInUser?.name}</span>
       </div>
 
       <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">

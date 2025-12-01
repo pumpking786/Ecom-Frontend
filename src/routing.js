@@ -26,67 +26,72 @@ import AdminUserList from "./pages/admin/user/user-list.page";
 import AdminUserCreate from "./pages/admin/user/user-create.page";
 import AdminUserEdit from "./pages/admin/user/user-edit.page";
 import AdminUserChangePwd from "./pages/admin/user/user-changepwd.page";
+import { Provider } from "react-redux";
+import store from "./store";
 const Routing = () => {
   return (
     <>
-      <ToastContainer />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePageLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
-            <Route path="category/:id" element={<CategoryDetail />} />
-            <Route path="search" element={<>Search Page</>} />
-          </Route>
-
-          <Route
-            path="/admin"
-            element={
-              <AdminAccessControl
-                accessTo="admin"
-                Component={<AdminLayout />}
-              />
-            }
-          >
-            <Route index element={<AdminDashboard />} />
-            <Route path="sliders" element={<AdminSliderList />} />
-            <Route path="slider/create" element={<AdminSliderCreate />} />
-            <Route path="slider/:id" element={<AdminSliderEdit />} />
-            <Route path="brands" element={<AdminBrandList />} />
-            <Route path="brand/create" element={<AdminBrandCreate />} />
-            <Route path="brand/:id" element={<AdminBrandEdit />} />
-            <Route path="categories" element={<AdminCategoryList />} />
-            <Route path="category/create" element={<AdminCategoryCreate />} />
-            <Route path="category/:id" element={<AdminCategoryEdit />} />
-            <Route path="products" element={<AdminProductList />} />
-            <Route path="product/create" element={<AdminProductCreate />} />
-            <Route path="product/:id" element={<AdminProductEdit />} />
-
-            <Route path="users" element={<AdminUserList />} />
-            <Route path="user" element={<AdminUserList />}>
-              <Route path="create" element={<AdminUserCreate />} />
-              <Route path=":id" element={<AdminUserEdit />} />
-              <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
+      {/* Redux */}
+      <Provider store={store}>
+        <ToastContainer />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePageLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="category/:id" element={<CategoryDetail />} />
+              <Route path="search" element={<>Search Page</>} />
             </Route>
-          </Route>
-          <Route
-            path="/customer"
-            element={
-              <AdminAccessControl
-                accessTo="customer"
-                Component={<>Customer Dashboard</>}
-              />
-            }
-          />
-          <Route path="/customer/order" element={<>Customer Order</>} />
-          <Route
-            path="/customer/order/history"
-            element={<>Customer Order History</>}
-          />
-          <Route path="*" element={<ErrorPage error={404} />} err />
-        </Routes>
-      </BrowserRouter>
+
+            <Route
+              path="/admin"
+              element={
+                <AdminAccessControl
+                  accessTo="admin"
+                  Component={<AdminLayout />}
+                />
+              }
+            >
+              <Route index element={<AdminDashboard />} />
+              <Route path="sliders" element={<AdminSliderList />} />
+              <Route path="slider/create" element={<AdminSliderCreate />} />
+              <Route path="slider/:id" element={<AdminSliderEdit />} />
+              <Route path="brands" element={<AdminBrandList />} />
+              <Route path="brand/create" element={<AdminBrandCreate />} />
+              <Route path="brand/:id" element={<AdminBrandEdit />} />
+              <Route path="categories" element={<AdminCategoryList />} />
+              <Route path="category/create" element={<AdminCategoryCreate />} />
+              <Route path="category/:id" element={<AdminCategoryEdit />} />
+              <Route path="products" element={<AdminProductList />} />
+              <Route path="product/create" element={<AdminProductCreate />} />
+              <Route path="product/:id" element={<AdminProductEdit />} />
+
+              <Route path="users" element={<AdminUserList />} />
+              <Route path="user" element={<Outlet />}>
+                <Route path="create" element={<AdminUserCreate />} />
+                <Route path=":id" element={<AdminUserEdit />} />
+                <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
+              </Route>
+            </Route>
+            <Route
+              path="/customer"
+              element={
+                <AdminAccessControl
+                  accessTo="customer"
+                  Component={<>Customer Dashboard</>}
+                />
+              }
+            />
+            <Route path="/customer/order" element={<>Customer Order</>} />
+            <Route
+              path="/customer/order/history"
+              element={<>Customer Order History</>}
+            />
+            <Route path="*" element={<ErrorPage error={404} />} err />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 };

@@ -36,11 +36,8 @@ const AdminUserList = () => {
     },
     {
       name: "Image",
-      selector: (row) => (
-        <>
-          <LightBox image={row.image} />
-        </>
-      ),
+      selector: (row) =>
+        row.image ? <LightBox image={row.image} /> : "No Image",
     },
     {
       name: "Status",

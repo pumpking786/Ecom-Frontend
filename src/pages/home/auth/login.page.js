@@ -3,12 +3,15 @@ import { Row, Col, Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { auth_svc } from "../../../services/auth.service";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setLoggedInUser } from "../../../reducers/user.reducer";
 export const LoginPage = () => {
   let [data, setData] = useState({
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({ email: "", password: "" });
+  let dispatch = useDispatch();
   let navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +25,7 @@ export const LoginPage = () => {
     try {
       e.preventDefault();
       let user = await auth_svc.login(data);
+      dispatch(setLoggedInUser(user)); //redux
       toast.success(`Welcome to ${user.role} panel`);
       navigate("/" + user.role);
     } catch (error) {
