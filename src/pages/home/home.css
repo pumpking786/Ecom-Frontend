@@ -7,17 +7,18 @@
 }
 
 .banner-image {
-  width: 104%; /* Stretch to full width of the slide */
+  width: 100%; /* Stretch to full width of the slide */
   height: auto; /* Maintain aspect ratio */
   max-height: 300px; /* Limit height to avoid oversized images */
-  object-fit: contain; /* Show the entire image, no cropping */
+  object-fit: cover;
+  /* object-fit: contain;  */
   display: block; /* Remove any inline spacing issues */
   margin: 0 auto; /* Center the image if needed */
 }
 
 /* Ensure Slider takes full width */
 .slick-slider {
-  width: 98%;
+  width: 100%;
 }
 
 /* Optional: Adjust for smaller screens */
@@ -26,3 +27,21 @@
     max-height: 250px; 
   }
 } */
+/* THIS IS THE ONLY CSS THAT HAS EVER WORKED FOR EVERYONE */
+.full-width-slider {
+  width: 100vw !important;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  overflow: hidden;
+}
+
+/* Kill slick's evil margins completely */
+.full-width-slider .slick-list,
+.full-width-slider .slick-track,
+.full-width-slider .slick-slide > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}

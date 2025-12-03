@@ -9,20 +9,17 @@ import {
 } from "react-bootstrap";
 import { users } from "../../mock/data";
 import "./home.css";
-import Banner1 from "../../assets/image/banner1.jpg";
 import offer from "../../assets/image/offer.gif";
 import cat1 from "../../assets/image/cat1.jpg";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { HeaderComponent } from "../../components/home/header.component";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import SliderComponent from "../../components/home/slider.component";
+import { home_svc } from "../../services/home.service";
 
 const HomePage = () => {
   let [banner, setBanner] = useState();
-  let [loading, setLoading] = useState(true);
-  let data = users.result;
   const settings = {
     dots: true,
     infinite: true,
@@ -32,54 +29,50 @@ const HomePage = () => {
     autoplay: true,
     autoplaySpeed: 3000,
   };
-  useEffect(() => {
-    console.log("On first mount");
-    setBanner([
-      {
-        _id: "",
-        title: "Banner 1",
-        image: Banner1,
-        link: "",
-      },
-      {
-        _id: "",
-        title: "Banner 2",
-        image: Banner1,
-        link: "",
-      },
-      {
-        _id: "",
-        title: "Banner 3",
-        image: Banner1,
-        link: "",
-      },
-    ]);
-    setLoading(false);
-  }, []);
+  // let data = users.result;
 
+  // useEffect(() => {
+  //   console.log("On first mount");
+  //   setBanner([
+  //     {
+  //       _id: "",
+  //       title: "Banner 1",
+  //       image: Banner1,
+  //       link: "",
+  //     },
+  //     {
+  //       _id: "",
+  //       title: "Banner 2",
+  //       image: Banner1,
+  //       link: "",
+  //     },
+  //     {
+  //       _id: "",
+  //       title: "Banner 3",
+  //       image: Banner1,
+  //       link: "",
+  //     },
+  //   ]);
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log("Only on loading state");
+  // }, [banner]);
+  const getActiveBanners = async () => {
+    try {
+      let response = await home_svc.listAllBanners();
+      setBanner(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
-    console.log("Only on loading state");
-  }, [loading, banner]);
+    getActiveBanners();
+  }, []);
   return (
     <>
       {/* Slider Section Start */}
-      {loading ? (
-        "Loading..."
-      ) : (
-        <Slider {...settings} className="mb-5">
-          {banner &&
-            banner.map((item, index) => (
-              <div key={index}>
-                {" "}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="banner-image"
-                />
-              </div>
-            ))}
-        </Slider>
-      )}
+      <SliderComponent settings={settings} data={banner} loading={false} />
       {/* Slider Section End */}
       {/* Offer Section Starts */}
       <Container>

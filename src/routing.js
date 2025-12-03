@@ -74,19 +74,31 @@ const Routing = () => {
                 <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
               </Route>
             </Route>
+            <Route path="/customer" element={<Outlet />}>
+              <Route
+                index
+                element={
+                  <AdminAccessControl
+                    accessTo="customer"
+                    Component={<>Customer Dashboard</>}
+                  />
+                }
+              />
+              <Route path="order" element={<>Customer Order</>} />
+              <Route
+                path="order/history"
+                element={<>Customer Order History</>}
+              />
+            </Route>
+
             <Route
-              path="/customer"
+              path="/seller"
               element={
                 <AdminAccessControl
-                  accessTo="customer"
-                  Component={<>Customer Dashboard</>}
+                  accessTo="seller"
+                  Component={<>Seller Dashboard</>}
                 />
               }
-            />
-            <Route path="/customer/order" element={<>Customer Order</>} />
-            <Route
-              path="/customer/order/history"
-              element={<>Customer Order History</>}
             />
             <Route path="*" element={<ErrorPage error={404} />} err />
           </Routes>
