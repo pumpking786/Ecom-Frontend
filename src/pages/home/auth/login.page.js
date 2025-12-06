@@ -48,43 +48,14 @@ export const LoginPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   let token = localStorage.getItem("mern_token");
-  //   let user = JSON.parse(localStorage.getItem("mern_user"));
-  //   if (token) {
-  //     navigate("/" + user.role);
-  //   }
-  // }, []);
-  const restoreUser = async () => {
-    try {
-      const response = await auth_svc.getLoggedInUser();
-      const user = {
-        name: response.result.name,
-        email: response.result.email,
-        role: response.result.role,
-        user_id: response.result.id,
-      };
-      dispatch(setLoggedInUser(user));
-      navigate("/" + user.role, { replace: true });
-    } catch (err) {
-      console.log("Token invalid or expired");
-      localStorage.removeItem("mern_token");
-      toast.error("Session expired. Please login again.");
-    }
-  };
   useEffect(() => {
     let token = localStorage.getItem("mern_token");
     // let user = JSON.parse(localStorage.getItem("mern_user"));
     if (token && loggedInUser) {
-      // User is already in Redux → redirect immediately
       navigate("/" + loggedInUser.role, { replace: true });
-    } else if (token && !loggedInUser) {
-      // Token exists but Redux is empty → restore user from API
-
-      restoreUser();
     }
-    // If no token → stay on login page (normal)
-  }, [loggedInUser, dispatch, navigate]);
+  }, [loggedInUser]);
+
   return (
     <>
       <Container>

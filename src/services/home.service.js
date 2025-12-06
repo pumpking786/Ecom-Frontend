@@ -14,6 +14,22 @@ class HomeService extends HttpService {
       throw err;
     }
   };
+  listAllcategories = async () => {
+    //api call
+    try {
+      let response = await this.getRequest("/category");
+      if (response.status) {
+        let cat_res = response.result.filter(
+          (item) => item.status === "active"
+        );
+        return cat_res;
+      } else {
+        throw response.msg;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 export const home_svc = new HomeService();
 export default HomeService;

@@ -10,25 +10,14 @@ import {
 import { users } from "../../mock/data";
 import "./home.css";
 import offer from "../../assets/image/offer.gif";
-import cat1 from "../../assets/image/cat1.jpg";
 
-import { HeaderComponent } from "../../components/home/header.component";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import SliderComponent from "../../components/home/slider.component";
-import { home_svc } from "../../services/home.service";
+
+import HomeBannerComponent from "../../components/home/banner/home-banner.component";
+import CategoryCardComponent from "../../components/home/category/category-card.component";
 
 const HomePage = () => {
-  let [banner, setBanner] = useState();
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-  };
   // let data = users.result;
 
   // useEffect(() => {
@@ -58,21 +47,11 @@ const HomePage = () => {
   // useEffect(() => {
   //   console.log("Only on loading state");
   // }, [banner]);
-  const getActiveBanners = async () => {
-    try {
-      let response = await home_svc.listAllBanners();
-      setBanner(response);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    getActiveBanners();
-  }, []);
+
   return (
     <>
       {/* Slider Section Start */}
-      <SliderComponent settings={settings} data={banner} loading={false} />
+      <HomeBannerComponent />
       {/* Slider Section End */}
       {/* Offer Section Starts */}
       <Container>
@@ -87,71 +66,7 @@ const HomePage = () => {
       {/* Offer Section Ends */}
 
       {/* Category Section Starts */}
-      <div className="bg-light">
-        <Container className="mt-3">
-          <Row>
-            <Col>
-              <h4 className="text-center">Category</h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={2}>
-              {" "}
-              {/* Adjusted to 6 columns with lg=2 */}
-              <Card>
-                <NavLink to="/category/1">
-                  <Card.Img variant="top" src={cat1} />
-                </NavLink>
-                <Card.Body>
-                  <Card.Title>
-                    <NavLink to="/category/1">Headphone </NavLink>
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={2}>
-              <Card>
-                <Card.Img variant="top" src={cat1} />
-                <Card.Body>
-                  <Card.Title>Headphone</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={2}>
-              <Card>
-                <Card.Img variant="top" src={cat1} />
-                <Card.Body>
-                  <Card.Title>Headphone</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={2}>
-              <Card>
-                <Card.Img variant="top" src={cat1} />
-                <Card.Body>
-                  <Card.Title>Headphone</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={2}>
-              <Card>
-                <Card.Img variant="top" src={cat1} />
-                <Card.Body>
-                  <Card.Title>Headphone</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={2}>
-              <Card>
-                <Card.Img variant="top" src={cat1} />
-                <Card.Body>
-                  <Card.Title>Headphone</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <CategoryCardComponent />
       {/* Category Section Ends */}
       <Container>
         <Row>
