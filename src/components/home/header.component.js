@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setLoggedInUser } from "../../reducers/user.reducer";
+import { logoutUser, setLoggedInUser } from "../../reducers/user.reducer";
 export const HeaderComponent = () => {
   //Redux
   // let loggedUser = JSON.parse(localStorage.getItem("mern_user"));
@@ -18,13 +18,17 @@ export const HeaderComponent = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("mern_token");
-    // localStorage.removeItem("mern_user");
-    dispatch(setLoggedInUser(null));
-    navigate("/login");
+  const logout = () => {
+    dispatch(logoutUser());
   };
+
+  // const handleLogout = (e) => {
+  //   e.preventDefault();
+  //   localStorage.removeItem("mern_token");
+  //   // localStorage.removeItem("mern_user");
+  //   dispatch(setLoggedInUser(null));
+  //   navigate("/login");
+  // };
   return (
     <>
       {/* Nav Section Start */}
@@ -69,11 +73,7 @@ export const HeaderComponent = () => {
                 <NavLink to={"/" + loggedUser.role} className="nav-link">
                   {loggedUser.name}
                 </NavLink>
-                <NavLink
-                  onClick={handleLogout}
-                  to="/login"
-                  className="nav-link"
-                >
+                <NavLink onClick={logout} to="/login" className="nav-link">
                   Log out
                 </NavLink>
               </>

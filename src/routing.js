@@ -28,6 +28,8 @@ import AdminUserEdit from "./pages/admin/user/user-edit.page";
 import AdminUserChangePwd from "./pages/admin/user/user-changepwd.page";
 import { Provider } from "react-redux";
 import store from "./store";
+import BrandDetail from "./pages/home/brand/brand-detail.page";
+import ProductDetail from "./pages/home/product/product-detail.page";
 const Routing = () => {
   return (
     <>
@@ -41,6 +43,14 @@ const Routing = () => {
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
               <Route path="category/:id" element={<CategoryDetail />} />
+
+              <Route path="brand/:slug" element={<BrandDetail />} />
+              <Route path="category/:slug" element={<CategoryDetail />} />
+              <Route path="product/:slug" element={<ProductDetail />} />
+
+              <Route path="cart" element={<>Cart List</>} />
+              <Route path="checkout" element={<>Checkout</>} />
+
               <Route path="search" element={<>Search Page</>} />
             </Route>
 

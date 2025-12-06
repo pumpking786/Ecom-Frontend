@@ -5,21 +5,21 @@ import SingleGridComponent from "../../common/single-grid-card.component";
 import { useCallback, useEffect, useState } from "react";
 import { home_svc } from "../../../services/home.service";
 
-const CategoryCardComponent = () => {
-  let [category, setCategory] = useState();
+const BrandCardComponent = () => {
+  let [brand, setBrand] = useState();
 
-  const getActiveCats = useCallback(async () => {
+  const getActiveBrands = useCallback(async () => {
     try {
-      let response = await home_svc.listAllcategories();
+      let response = await home_svc.listAllBrands();
       if (response) {
-        setCategory(response);
+        setBrand(response);
       }
     } catch (err) {
       console.error(err);
     }
   });
   useEffect(() => {
-    getActiveCats();
+    getActiveBrands();
   });
   return (
     <>
@@ -29,19 +29,19 @@ const CategoryCardComponent = () => {
           <Col className="px-3">
             <Row className="my-3 py-3">
               <Col>
-                <h4 className="text-center">Category</h4>
+                <h4 className="text-center">Brand</h4>
               </Col>
             </Row>
             <hr />
             <Row>
-              {category &&
-                category.map((item, index) => (
+              {brand &&
+                brand.map((item, index) => (
                   <Col key={index} sm={6} md={2}>
                     {" "}
                     {/* Adjusted to 6 columns with lg=2 */}
                     <SingleGridComponent
-                      url={`/category/${item.slug}`}
-                      title={item.name}
+                      url={`/brand/${item.slug}`}
+                      title={item.title}
                       image={
                         process.env.REACT_APP_API_URL + "/assets/" + item.image
                       }
@@ -55,4 +55,4 @@ const CategoryCardComponent = () => {
     </>
   );
 };
-export default CategoryCardComponent;
+export default BrandCardComponent;

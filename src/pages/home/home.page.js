@@ -16,6 +16,8 @@ import { NavLink } from "react-router-dom";
 
 import HomeBannerComponent from "../../components/home/banner/home-banner.component";
 import CategoryCardComponent from "../../components/home/category/category-card.component";
+import BrandCardComponent from "../../components/home/brand/brand-card.component";
+import ProductCardComponent from "../../components/home/product/product-card.component";
 
 const HomePage = () => {
   // let data = users.result;
@@ -68,7 +70,13 @@ const HomePage = () => {
       {/* Category Section Starts */}
       <CategoryCardComponent />
       {/* Category Section Ends */}
-      <Container>
+      {/* Brand Section Starts */}
+      <BrandCardComponent />
+      {/* Brand Section Ends */}
+      {/* Product Section Starts */}
+      <ProductCardComponent />
+      {/* Product Section Ends */}
+      {/* <Container>
         <Row>
           <Col>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -141,7 +149,7 @@ const HomePage = () => {
             </Tab.Container>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </>
   );
 };

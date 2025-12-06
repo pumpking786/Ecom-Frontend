@@ -14,6 +14,19 @@ class HomeService extends HttpService {
       throw err;
     }
   };
+  listAllBrands = async () => {
+    //api call
+    try {
+      let response = await this.getRequest("/brand/active");
+      if (response.status) {
+        return response.result;
+      } else {
+        throw response.msg;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
   listAllcategories = async () => {
     //api call
     try {
@@ -23,6 +36,22 @@ class HomeService extends HttpService {
           (item) => item.status === "active"
         );
         return cat_res;
+      } else {
+        throw response.msg;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+  listAllProducts = async () => {
+    //api call
+    try {
+      let response = await this.getRequest("/product");
+      if (response.status) {
+        let product_res = response.result.filter(
+          (item) => item.status === "active"
+        );
+        return product_res;
       } else {
         throw response.msg;
       }

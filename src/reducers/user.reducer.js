@@ -31,6 +31,10 @@ const UserSlicer = createSlice({
       state.loggedInUser = action.payload;
       // console.log("UserReducer", action);
     },
+    logoutUser: (state, action) => {
+      localStorage.removeItem("mern_token");
+      state.loggedInUser = null;
+    },
   },
   extraReducers: (builders) => {
     builders.addCase(getLoggedInUser.fulfilled, (state, action) => {
@@ -42,5 +46,5 @@ const UserSlicer = createSlice({
     });
   },
 });
-export const { setLoggedInUser } = UserSlicer.actions;
+export const { setLoggedInUser, logoutUser } = UserSlicer.actions;
 export default UserSlicer.reducer;
