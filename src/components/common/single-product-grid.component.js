@@ -16,7 +16,7 @@ const SingleProductGrid = ({ product }) => {
       <Card onClick={goToProduct} style={{ cursor: "pointer" }}>
         <Card.Img
           variant="top"
-          src={process.env.REACT_APP_API_URL + "/assets/" + product.images[1]}
+          src={process.env.REACT_APP_API_URL + "/assets/" + product.images[0]}
           onError={handleErr}
         />
         <Card.Body>

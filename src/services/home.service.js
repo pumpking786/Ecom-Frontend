@@ -59,6 +59,23 @@ class HomeService extends HttpService {
       throw err;
     }
   };
+  productByCatSlug = async (slug) => {
+    try {
+      let detail = await this.getRequest("/category/slug/" + slug);
+      return detail;
+      // console.log("Detail: ", detail);
+    } catch (err) {
+      throw err;
+    }
+  };
+  getProductBySlug = async (slug) => {
+    try {
+      let detail = await this.getRequest("/product/slug/" + slug);
+      return detail;
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 export const home_svc = new HomeService();
 export default HomeService;

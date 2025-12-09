@@ -2,7 +2,7 @@ import { Col, Container, Row, Card } from "react-bootstrap";
 import SingleProductGrid from "../../common/single-product-grid.component";
 import { useCallback, useEffect, useState } from "react";
 import { home_svc } from "../../../services/home.service";
-const ProductCardComponent = () => {
+const ProductCardComponent = ({ allProduct }) => {
   let [product, setProduct] = useState();
   const getActiveProducts = useCallback(async () => {
     try {
@@ -15,8 +15,12 @@ const ProductCardComponent = () => {
     }
   });
   useEffect(() => {
-    getActiveProducts();
-  });
+    if (allProduct) {
+      setProduct(allProduct);
+    } else {
+      getActiveProducts();
+    }
+  }, [allProduct]);
   return (
     <>
       <div>

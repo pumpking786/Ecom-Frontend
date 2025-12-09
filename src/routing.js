@@ -30,6 +30,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import BrandDetail from "./pages/home/brand/brand-detail.page";
 import ProductDetail from "./pages/home/product/product-detail.page";
+import CustomerLayout from "./pages/customer/layout/customer.layout";
 const Routing = () => {
   return (
     <>
@@ -42,11 +43,10 @@ const Routing = () => {
               <Route index element={<HomePage />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
-              <Route path="category/:id" element={<CategoryDetail />} />
 
               <Route path="brand/:slug" element={<BrandDetail />} />
               <Route path="category/:slug" element={<CategoryDetail />} />
-              <Route path="product/:slug" element={<ProductDetail />} />
+              <Route path="product-detail/:slug" element={<ProductDetail />} />
 
               <Route path="cart" element={<>Cart List</>} />
               <Route path="checkout" element={<>Checkout</>} />
@@ -84,19 +84,18 @@ const Routing = () => {
                 <Route path="change-pwd/:id" element={<AdminUserChangePwd />} />
               </Route>
             </Route>
-            <Route path="/customer" element={<Outlet />}>
-              <Route
-                index
-                element={
-                  <AdminAccessControl
-                    accessTo="customer"
-                    Component={<>Customer Dashboard</>}
-                  />
-                }
-              />
+            <Route
+              path="/customer"
+              element={
+                <AdminAccessControl
+                  accessTo="customer"
+                  Component={<CustomerLayout />}
+                />
+              }
+            >
               <Route path="order" element={<>Customer Order</>} />
               <Route
-                path="order/history"
+                path="order-history"
                 element={<>Customer Order History</>}
               />
             </Route>
