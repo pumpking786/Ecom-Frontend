@@ -14,7 +14,7 @@ const CartList = () => {
     try {
       let response = await home_svc.getCartDetail(cartDetail);
 
-      setCartDetail(response.result.cart);
+      setCartDetail(response.result);
     } catch (err) {
       console.error(err);
     }
