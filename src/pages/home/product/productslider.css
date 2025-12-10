@@ -1,0 +1,49 @@
+/* productslider.css — FINAL VERSION FOR PRODUCT DETAIL */
+.product-image-container {
+  width: 100%;
+  padding-bottom: 55%; /* Makes it perfect square */
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  /* background: #fff; */
+  /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); */
+}
+
+/* This is the magic — makes slider fill the square */
+.product-image-container > div,
+.product-image-container .full-width-slider {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+/* Kill slick's evil margins */
+/* .product-image-container .slick-list,
+.product-image-container .slick-track,
+.product-image-container .slick-slide > div {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+} */
+
+/* THE KEY: Perfect image fit */
+.product-image-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* Shows FULL image — no crop */
+  /* object-fit: cover !important; */ /* ← Uncomment if you want zoom & crop */
+  /* background: white; */
+  /* padding: 20px;  */
+  /* box-sizing: border-box; */
+  transition: transform 0.4s ease;
+}
+
+/* Optional: Zoom on hover */
+.product-image-container:hover img {
+  transform: scale(1.05);
+}

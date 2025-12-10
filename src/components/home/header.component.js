@@ -15,6 +15,15 @@ export const HeaderComponent = () => {
   let loggedUser = useSelector((store) => {
     return store.user.loggedInUser;
   });
+  let cartItemCount = useSelector((store) => {
+    if (store.cart.cart && store.cart.cart.length) {
+      let count = 0;
+      store.cart.cart.map((item) => {
+        count += Number(item.qty);
+      });
+      return count;
+    }
+  });
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -66,7 +75,7 @@ export const HeaderComponent = () => {
           </Nav>
           <Nav>
             <NavLink to="/cart" className="nav-link">
-              Cart (0)
+              Cart ({cartItemCount})
             </NavLink>
             {loggedUser ? (
               <>

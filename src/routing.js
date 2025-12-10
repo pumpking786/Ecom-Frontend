@@ -31,6 +31,9 @@ import store from "./store";
 import BrandDetail from "./pages/home/brand/brand-detail.page";
 import ProductDetail from "./pages/home/product/product-detail.page";
 import CustomerLayout from "./pages/customer/layout/customer.layout";
+import CategoryCardComponent from "./components/home/category/category-card.component";
+import ProductCardComponent from "./components/home/product/product-card.component";
+import CartList from "./pages/home/cart/cart-list.page";
 const Routing = () => {
   return (
     <>
@@ -43,12 +46,14 @@ const Routing = () => {
               <Route index element={<HomePage />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
+              <Route path="category" element={<CategoryCardComponent />} />
+              <Route path="products" element={<ProductCardComponent />} />
 
               <Route path="brand/:slug" element={<BrandDetail />} />
               <Route path="category/:slug" element={<CategoryDetail />} />
               <Route path="product-detail/:slug" element={<ProductDetail />} />
 
-              <Route path="cart" element={<>Cart List</>} />
+              <Route path="cart" element={<CartList />} />
               <Route path="checkout" element={<>Checkout</>} />
 
               <Route path="search" element={<>Search Page</>} />

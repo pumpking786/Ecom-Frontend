@@ -97,10 +97,13 @@ const ProductForm = ({ submitForm, defaultValue, buttontext }) => {
           });
         }
       });
-      if (populate_images.length) {
+
+      if (populate_images.length > 0) {
+        const currentImages = formik.values.images || [];
+        const combinedImages = [...currentImages, ...populate_images];
         formik.setValues({
           ...formik.values,
-          images: populate_images,
+          images: combinedImages,
         });
       }
     }
