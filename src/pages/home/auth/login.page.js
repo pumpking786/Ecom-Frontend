@@ -48,13 +48,20 @@ export const LoginPage = () => {
     }
   };
 
+  // useEffect(() => {
+  //   let token = localStorage.getItem("mern_token");
+  //   // let user = JSON.parse(localStorage.getItem("mern_user"));
+  //   if (token && loggedInUser) {
+  //     navigate("/" + loggedInUser.role, { replace: true });
+  //   }
+  // }, [loggedInUser]);
   useEffect(() => {
     let token = localStorage.getItem("mern_token");
-    // let user = JSON.parse(localStorage.getItem("mern_user"));
-    if (token && loggedInUser) {
-      navigate("/" + loggedInUser.role, { replace: true });
+    let user = JSON.parse(localStorage.getItem("mern_user"));
+    if (token) {
+      navigate("/" + user.role);
     }
-  }, [loggedInUser]);
+  }, []);
 
   return (
     <>

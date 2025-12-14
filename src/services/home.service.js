@@ -84,6 +84,18 @@ class HomeService extends HttpService {
       throw err;
     }
   };
+  createOrder = async (payload) => {
+    try {
+      let detail = await this.postRequest("/order", payload, { login: true });
+      if (detail) {
+        return detail;
+      } else {
+        throw detail;
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 export const home_svc = new HomeService();
 export default HomeService;

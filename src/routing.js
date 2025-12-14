@@ -34,6 +34,7 @@ import CustomerLayout from "./pages/customer/layout/customer.layout";
 import CategoryCardComponent from "./components/home/category/category-card.component";
 import ProductCardComponent from "./components/home/product/product-card.component";
 import CartList from "./pages/home/cart/cart-list.page";
+import Checkout from "./pages/home/cart/checkout.page";
 const Routing = () => {
   return (
     <>
@@ -54,9 +55,18 @@ const Routing = () => {
               <Route path="product-detail/:slug" element={<ProductDetail />} />
 
               <Route path="cart" element={<CartList />} />
-              <Route path="checkout" element={<>Checkout</>} />
+              <Route
+                path="checkout"
+                element={
+                  <AdminAccessControl
+                    Component={<Checkout />}
+                    accessTo={"customer"}
+                  />
+                }
+              />
 
               <Route path="search" element={<>Search Page</>} />
+              <Route path="/payment" element={<>Khalti return url</>} />
             </Route>
 
             <Route
