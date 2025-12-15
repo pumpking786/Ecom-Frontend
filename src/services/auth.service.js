@@ -20,6 +20,24 @@ class AuthService extends HttpService {
       throw err;
     }
   };
+  register = async (formData) => {
+    try {
+      let response = await this.postRequest("register", formData, {
+        files: true,
+      });
+      return response;
+    } catch (err) {
+      throw err;
+    }
+  };
+  verifyOtp = async (data) => {
+    try {
+      let response = await this.postRequest("verify-otp", data);
+      return response;
+    } catch (err) {
+      throw err;
+    }
+  };
   getLoggedInUser = async () => {
     try {
       let response = await this.getRequest("/me-profile", {

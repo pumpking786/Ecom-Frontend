@@ -35,6 +35,7 @@ import CategoryCardComponent from "./components/home/category/category-card.comp
 import ProductCardComponent from "./components/home/product/product-card.component";
 import CartList from "./pages/home/cart/cart-list.page";
 import Checkout from "./pages/home/cart/checkout.page";
+import { VerifyTokenPage } from "./pages/home/auth/verify.page";
 const Routing = () => {
   return (
     <>
@@ -47,6 +48,7 @@ const Routing = () => {
               <Route index element={<HomePage />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
+              <Route path="verify" element={<VerifyTokenPage />} />
               <Route path="category" element={<CategoryCardComponent />} />
               <Route path="products" element={<ProductCardComponent />} />
 
